@@ -13,8 +13,7 @@ jobs:
         with:
           version:  12.x
       - name: Checkout branch
-        uses: frances-joffany-navarro/create-pull-request@v3
-          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+        uses: actions/checkout@v2
 
       - name: Clean install dependencies
         run: npm ci
