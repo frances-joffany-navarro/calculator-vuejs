@@ -1,5 +1,7 @@
-# Calculator using VueJS 2
-I created this calculator project for me to familiarize in using VueJS 2 and to apply what I learned by watching tutorials in VueJS 2. I am currently following a Junior Web Developer training at Becode. I worked on this project on May 12 - 13, 2021
+# Calculator using VueJS
+I created this calculator project for me to familiarize in using VueJS and to apply what I learned by watching tutorials in VueJS. I am currently following a Junior Web Developer training at Becode. I worked on this project on May 12 - 13, 2021
+
+Note: I am using VueJS version 2
 
 
 - I can create a Vue project using **Vue CLI**
