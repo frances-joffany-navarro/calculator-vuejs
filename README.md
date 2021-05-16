@@ -1,5 +1,5 @@
-# Calculator Project in VueJS
-This is a starter project using VueJS. I created this project for me to familiarize myself in using VueJS and to apply what I learned.
+# Calculator using VueJS 2
+I created this calculator project for me to familiarize in using VueJS 2 and to apply what I learned by watching tutorials in VueJS 2. I am currently following a Junior Web Developer training at Becode. I worked on this project on May 12 - 13, 2021
 
 
 - I can create a Vue project using **Vue CLI**
@@ -8,5 +8,9 @@ This is a starter project using VueJS. I created this project for me to familiar
 ## Website
 [https://frances-joffany-navarro.github.io/calculator-vuejs/](https://frances-joffany-navarro.github.io/calculator-vuejs/)
 
+## Preview
+![Calculator Preview](public/calculator.jpg)
+
 ## Credit
 - [15 VUE JS Project Ideas: Beginner to Expert [With tutorial]](https://nerdjfpb.medium.com/15-vue-js-project-ideas-beginner-to-expert-with-tutorial-9a315d184a91).
+- This is a helpful site https://vuejs.org/. There are also free video tutorials website linked on this site.
