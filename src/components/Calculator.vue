@@ -34,85 +34,162 @@ export default {
     data() {
         return {
             content: '0',
-            previous: 0,
-            operator: ''
+            operator: '',
+            arr: [],
+            result: ''
         }
     },
     methods: {
         clear() {
-            this.content = '0'
+            this.content = '0',
+            this.operator = '',
+            this.arr = [],
+            this.result = ''
         },
+
         sign() {
             if(this.content !== '0'){
-                if(this.content[0]!== '-' && this.content !== ''){
-                this.content = '-' + this.content                
+                if(this.operator === ''){
+                    if(this.content[0] !== '-' && this.content !== '' ){
+                        this.content = '-' + this.content                
+                    } else {
+                        this.content = this.content.substring(1)
+                    }
                 } else {
-                    this.content = this.content.substring(1)
-                }
-            }            
+                    if(this.operator === '*'){
+                        this.operator = 'x'
+                    }else if(this.operator === '/'){
+                        this.operator = '÷'
+                    }
+                    
+                    this.arr = this.content.split(this.operator);
+                    if(this.arr[1][0] !== '-' && this.arr[1].length > 0 ){        
+                        console.log(this.arr[0] + this.operator + '-' + this.arr[1]  )               
+                        this.content = this.arr[0] + this.operator + '-' + this.arr[1]             
+                    } else {
+                        console.log(this.arr[0] + this.operator + this.arr[1].substring(1))
+                        this.content = this.arr[0] + this.operator + this.arr[1].substring(1)
+                    }
+                }                
+            }      
+            this.arr = []      
+        },
+        rounded(number){
+            return Math.round((number + Number.EPSILON) * 100000000) / 100000000
         },
         percent(){
-            this.content = String(parseFloat(this.content) / 100)
+            if(this.operator === ''){
+                this.content = String((parseFloat(this.content) / 100).toExponential(4))
+            }            
         },
         getNumber(number){
             if(this.content === '0'){
                 this.content = ''
             }
-            this.content += number
-        },
-        getPrevious(){
-            this.previous = this.content
-            this.content = '0'
-        },
-        divide(){
-            this.getPrevious()
-            this.operator = '/' 
-        },
-        multiply(){
-            this.getPrevious()
-            this.operator = '*'
-        },
-        minus(){
-            this.getPrevious()
-            this.operator = '-'
+            if(this.content.length < 12){
+                this.content += number
+            }            
         },
         add(){
-            this.getPrevious()
-            this.operator = '+'
+            if(this.operator === ''){
+                if(this.content[this.content.length-1] !== '.'){                
+                    this.operator = '+'
+                    this.content += '+'
+                }
+            }
+        },
+        minus(){
+            if(this.operator === ''){
+                if(this.content[this.content.length-1] !== '.'){
+                    this.operator = '-'
+                    this.content += '-'
+                }
+            }
+        },
+        multiply(){
+            if(this.operator === ''){
+                if(this.content[this.content.length-1] !== '.'){
+                    this.operator = '*'
+                    this.content += 'x'
+                }
+            }
+        },
+        divide(){
+            if(this.operator === ''){
+                if(this.content[this.content.length-1] !== '.'){
+                    this.operator = '/'
+                    this.content += '÷'  
+                }
+            }
         },
         dot(){
-            if(this.content.indexOf('.') < 0){
-                this.content = this.content.concat('.')
+            if(this.operator === ''){
+                if(this.content.indexOf('.') < 0){
+                    this.content = this.content.concat('.')
+                }
+            } else {
+                this.arr = this.content.split(this.operator);
+                if(this.arr[1].length > 0){
+                    if(this.arr[1].indexOf('.') < 0){
+                        this.content = this.content.concat('.')
+                    }
+                }
             }
+            this.arr = []            
         },
         equal(){
-            switch (this.operator) {
-                case '+':                    
-                    this.content = String(parseFloat(this.previous) + parseFloat(this.content))
-                    this.operator = ''
-                    break;
-
-                case '-':
-                    
-                    this.content = String(parseFloat(this.previous) - parseFloat(this.content))
-                    this.operator = ''
-                    break;
-
-                case '*':
-                    this.content = String(parseFloat(this.previous) * parseFloat(this.content))
-                    this.operator = ''
-                    break;
-                
-                case '/':
-                    this.content = String(parseFloat(this.previous) / parseFloat(this.content))
-                    this.operator = ''
-                    break;
             
-                default:
-                    break;
+            if(this.content.indexOf('x') > 0){
+                this.operator = 'x'
+            } else if (this.content.indexOf('÷') > 0){
+                this.operator = '÷'
+            }         
+
+            if(this.content[this.content.length-1] !== '.' && this.content[this.content.length-1] !== this.operator){
+                switch (this.operator) {
+                    case '+':                    
+                        console.log(this.content)
+                        this.arr = this.content.split('+');
+                        this.content = String(this.rounded(parseFloat(this.arr[0]) + parseFloat(this.arr[1])))
+                        this.arr = []
+                        this.operator = '' 
+
+                        break;
+
+                    case '-':
+                        console.log(this.content)
+                        this.arr = this.content.split('-');
+                        this.content = String(this.rounded(parseFloat(this.arr[0]) - parseFloat(this.arr[1])))
+                        
+                        this.arr = []
+                        this.operator = ''
+                        break;
+
+                    case '*' :
+                    case 'x' :
+                        console.log(this.content)
+                        this.arr = this.content.split('x');
+                        this.content = String(this.rounded(parseFloat(this.arr[0]) * parseFloat(this.arr[1])))
+                        //this.content = String(parseFloat(this.previous) * parseFloat(this.content))
+                        this.arr = []
+                        this.operator = ''
+                        break;
+                    
+                    case '/' :
+                    case '÷' :
+                        this.arr = this.content.split('÷');
+                        this.content = String(this.rounded(parseFloat(this.arr[0]) / parseFloat(this.arr[1])))
+                        
+                        this.arr = []
+                        this.operator = ''
+                        break;
+                
+                    default:
+                        console.log("operator no valid")
+                        break;
+                }
             }
         }
-
     },
 }
 </script>
