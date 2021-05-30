@@ -3,9 +3,10 @@ I created this calculator project for me to familiarize in using VueJS and to ap
 
 Note: I am using VueJS version 2
 
-
 - I can create a Vue project using **Vue CLI**
 - I can deploy my vue project in Github pages. I followed this article in [dev.to](https://dev.to/rolanddoda/deploy-to-github-pages-like-a-pro-with-github-actions-4hdg).
+- Limit to 8 decimal places
+- Updated this project on May 26-27, 2021.
 
 ## Website
 [https://frances-joffany-navarro.github.io/calculator-vuejs/](https://frances-joffany-navarro.github.io/calculator-vuejs/)
